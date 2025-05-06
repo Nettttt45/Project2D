@@ -2,15 +2,26 @@ using UnityEngine;
 
 public class FrameController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public float rotationSpeed = 100f;
+    public float returnSpeed = 50f;
 
-    // Update is called once per frame
+    private bool isRotatingLeft = false;
+
     void Update()
     {
-        
+        if (Input.GetMouseButton(0))
+        {
+            isRotatingLeft = true;
+        }
+        else
+        {
+            isRotatingLeft = false;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        float rotation = isRotatingLeft ? rotationSpeed : -returnSpeed;
+        transform.Rotate(0, 0, rotation * Time.fixedDeltaTime);
     }
 }
