@@ -13,15 +13,18 @@ public class Pause : MonoBehaviour
 
     public void ResumeGame()
     {
+        Debug.Log("Resume pressed");
         pauseMenu.SetActive(false);
-        Time.timeScale = 1; 
+        Time.timeScale = 1;
     }
 
-    public void Home()
+public void Home()
     {
-        Time.timeScale = 1; 
-        SceneManager.LoadScene("Main Menu");
+        Debug.Log("Home pressed");
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
     }
+
 
     public void Restart()
     {
