@@ -2,26 +2,28 @@ using UnityEngine;
 
 public class FrameController : MonoBehaviour
 {
-    public float rotationSpeed = 100f;
-    public float returnSpeed = 50f;
-
-    private bool isRotatingLeft = false;
+    public float rotateSpeed = 100f;   // ความเร็วการหมุน
+    public float returnSpeed = 100f;   // ความเร็วการหมุนกลับ
+    public float maxRotation = 15f;    // หมุนซ้ายสุดแค่กี่องศา (เช่น -15 องศา)
+    
+    private float targetRotation = 0f; // เป้าหมายที่ต้องการให้หมุนไป
+    private float currentRotation = 0f;
 
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        // ถ้ากดปุ่มเมาส์ซ้ายหรือ space bar → ตั้งเป้าหมุนไปทางซ้าย
+        if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Space))
         {
-            isRotatingLeft = true;
+            targetRotation = -maxRotation;
         }
         else
         {
-            isRotatingLeft = false;
+            targetRotation = 0f; // ปล่อย → กลับไปตำแหน่งเดิม
         }
-    }
 
-    void FixedUpdate()
-    {
-        float rotation = isRotatingLeft ? rotationSpeed : -returnSpeed;
-        transform.Rotate(0, 0, rotation * Time.fixedDeltaTime);
+        // ค่อย ๆ หมุนไปยังเป้าหมายแบบนุ่มนวล
+        currentRotation = Mathf.MoveTowards(currentRotation, targetRotation, (targetRotation == 0 ? returnSpeed : rotateSpeed) * Time.deltaTime);
+        
+        transform.rotation = Quaternion.Euler(0f, 0f, currentRotation);
     }
 }
