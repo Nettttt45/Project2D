@@ -4,7 +4,7 @@ public class FrameController : MonoBehaviour
 {
     public float rotateSpeed = 100f;   // ความเร็วการหมุน
     public float returnSpeed = 100f;   // ความเร็วการหมุนกลับ
-    public float maxRotation = 15f;    // หมุนซ้ายสุดแค่กี่องศา (เช่น -15 องศา)
+    public float maxRotation = 360f;    // หมุนซ้ายสุดแค่กี่องศา (เช่น -15 องศา)
     
     private float targetRotation = 0f; // เป้าหมายที่ต้องการให้หมุนไป
     private float currentRotation = 0f;
